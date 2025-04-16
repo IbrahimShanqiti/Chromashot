@@ -2,188 +2,210 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Chromashot • Colour Timeline Generator</title>
+  <title>Chromashot • Colour‑Timeline Generator</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- Google Font -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #f5f7fa;
-      --card: #ffffff;
-      --primary: #5c6ac4;
-      --primary-hover: #4b58a6;
-      --text: #333333;
-      --text-light: #666666;
-      --shadow: rgba(0, 0, 0, 0.1);
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --accent: #7b5cff;
+      --accent-hover: #6447e0;
+      --text: #eaeaea;
+      --text-muted: #9a9a9a;
+      --shadow: rgba(0, 0, 0, 0.5);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing:border-box; margin:0; padding:0; }
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 1rem;
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      padding:1.25rem;
     }
-    .container {
-      max-width: 600px;
-      width: 100%;
-      background: var(--card);
-      border-radius: 12px;
-      box-shadow: 0 4px 16px var(--shadow);
-      overflow: hidden;
+    /* ---------- Shell ---------- */
+    .shell {
+      width:100%;
+      max-width:680px;
+      background:var(--card);
+      border-radius:14px;
+      box-shadow:0 10px 30px var(--shadow);
+      overflow:hidden;
     }
     header {
-      background: var(--primary);
-      color: #fff;
-      padding: 1.5rem;
-      text-align: center;
+      padding:2.2rem 2rem 1.6rem;
+      background:#141414;
+      text-align:center;
+      border-bottom:1px solid #222;
     }
-    header h1 {
-      font-size: 1.75rem;
-      font-weight: 600;
-    }
-    main {
-      padding: 2rem;
-    }
+    header h1 { font-size:1.9rem; font-weight:600; margin-bottom:.35rem; }
+    header p  { font-weight:300; color:var(--text-muted); font-size:.95rem; }
+
+    /* ---------- Main ---------- */
+    main { padding:2rem 2.2rem; }
+
     .progress-bar {
-      display: none;
-      width: 100%;
-      height: 0.5rem;
-      margin-bottom: 1.5rem;
-      appearance: none;
+      width:100%; height:.5rem; margin-bottom:1.8rem;
+      display:none; appearance:none;
     }
-    .progress-bar::-webkit-progress-bar {
-      background: #eee;
-      border-radius: 4px;
-    }
-    .progress-bar::-webkit-progress-value {
-      background: var(--primary);
-      border-radius: 4px;
-    }
+    .progress-bar::-webkit-progress-bar { background:#262626; border-radius:4px; }
+    .progress-bar::-webkit-progress-value { background:var(--accent); border-radius:4px; }
+
     .upload-card {
-      border: 2px dashed var(--primary);
-      border-radius: 8px;
-      padding: 2rem;
-      text-align: center;
-      transition: background 0.2s, border-color 0.2s;
+      border:2px dashed var(--accent);
+      border-radius:10px;
+      padding:2.5rem 1.75rem;
+      text-align:center;
+      transition:.25s ease;
     }
-    .upload-card:hover {
-      background: #fafbff;
-      border-color: var(--primary-hover);
-    }
-    .upload-card input[type="file"] {
-      display: none;
-    }
+    .upload-card:hover { background:#181818; border-color:var(--accent-hover); }
+
+    .upload-card p { margin-bottom:1.1rem; color:var(--text-muted); }
+
+    .upload-card input[type=file]{ display:none; }
+
     .upload-label {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: var(--primary);
-      color: #fff;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-      font-weight: 500;
+      display:inline-block;
+      padding:.8rem 1.8rem;
+      background:var(--accent);
+      color:#fff;
+      border-radius:8px;
+      font-weight:500;
+      cursor:pointer;
+      transition:.2s;
     }
-    .upload-label:hover {
-      background: var(--primary-hover);
-    }
-    .upload-card p {
-      margin-bottom: 1rem;
-      color: var(--text-light);
-    }
+    .upload-label:hover { background:var(--accent-hover); }
+
     .btn-submit {
-      display: block;
-      width: 100%;
-      margin-top: 1rem;
-      padding: 0.75rem;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
+      width:100%;
+      margin-top:1.2rem;
+      padding:.9rem;
+      background:var(--accent);
+      border:none;
+      border-radius:8px;
+      font-weight:600;
+      color:#fff;
+      cursor:pointer;
+      transition:.2s;
     }
-    .btn-submit:hover {
-      background: var(--primary-hover);
-    }
-    .result {
-      margin-top: 2rem;
-      text-align: center;
-    }
+    .btn-submit:hover { background:var(--accent-hover); }
+
+    #filename { margin-top:.65rem; font-size:.9rem; color:var(--text-muted); }
+
+    /* ---------- Result ---------- */
+    .result { margin-top:2.5rem; text-align:center; }
     .result img {
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 16px var(--shadow);
+      max-width:100%; border-radius:10px;
+      box-shadow:0 6px 24px var(--shadow);
     }
     .btn-download {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1.25rem;
-      background: var(--primary);
-      color: #fff;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.2s;
+      display:inline-block;
+      margin-top:1.1rem;
+      padding:.55rem 1.5rem;
+      background:var(--accent);
+      border-radius:8px;
+      color:#fff;
+      font-weight:500;
+      text-decoration:none;
+      transition:.2s;
     }
-    .btn-download:hover {
-      background: var(--primary-hover);
+    .btn-download:hover { background:var(--accent-hover); }
+
+    /* ---------- Tech badge ---------- */
+    .stack {
+      margin-top:3rem; display:flex; justify-content:center; gap:1rem;
+      flex-wrap:wrap; font-size:.8rem; color:var(--text-muted);
     }
+    .badge {
+      background:#262626; padding:.4rem .75rem;
+      border-radius:999px; border:1px solid #333;
+      letter-spacing:.03em;
+    }
+
     footer {
-      text-align: center;
-      padding: 1rem 0;
-      font-size: 0.875rem;
-      color: var(--text-light);
+      text-align:center;
+      padding:1.4rem 0;
+      font-size:.75rem;
+      background:#141414;
+      color:var(--text-muted);
     }
-    @media (max-width: 480px) {
-      header h1 { font-size: 1.5rem; }
-      .upload-card { padding: 1.5rem; }
-    }
+    footer a { color:var(--accent); text-decoration:none; }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="shell">
+    <!-- ===== header ===== -->
     <header>
       <h1>Chromashot</h1>
-      <p style="font-weight:300;">Generate a colour‑timeline from your video</p>
+      <p>Turn any video into a colour‑timeline fingerprint</p>
     </header>
+
+    <!-- ===== main ===== -->
     <main>
+      <!-- upload progress -->
+      <progress id="progress" class="progress-bar" max="100" value="0"></progress>
+
+      <!-- upload form -->
       <form id="uploadForm" class="upload-card" action="/upload" method="post" enctype="multipart/form-data">
-        <p>Upload a video file (MP4, MKV, AVI, etc.) and get a 1920×1080 colour‑stripe image.</p>
+        <p>Select a video file (MP4, MKV, AVI …) &amp; get a 1920 × 1080 colour stripe PNG.</p>
+
         <label class="upload-label">
           Choose Video
-          <input type="file" name="video" accept="video/*" required onchange="document.getElementById('filename').textContent = this.files[0]?.name">
+          <input id="videoInput" type="file" name="video" accept="video/*" required>
         </label>
-        <div id="filename" style="margin-top:0.5rem;color:var(--text-light);font-size:0.9rem;"></div>
+
+        <div id="filename"></div>
         <button type="submit" class="btn-submit">Generate Timeline</button>
       </form>
 
+      <!-- result -->
       {% if image_url %}
       <div class="result">
-        <h2 style="margin-bottom:1rem;color:var(--text);font-weight:400;">Your Colour Timeline</h2>
         <img src="{{ image_url }}" alt="Colour Timeline">
         <br>
-        <a href="{{ image_url }}" download class="btn-download">Download PNG</a>
+        <a href="{{ image_url }}" download="timeline.png" class="btn-download">Download PNG</a>
       </div>
       {% endif %}
+
+      <!-- tech badges -->
+      <div class="stack">
+        <span class="badge">Docker</span>
+        <span class="badge">C</span>
+        <span class="badge">Flask</span>
+        <span class="badge">FFmpeg</span>
+      </div>
     </main>
+
+    <!-- ===== footer ===== -->
     <footer>
-      © {{ current_year }} Your Name • <a href="https://github.com/yourrepo" style="color:var(--primary);text-decoration:none;">GitHub Repo</a>
+      © {{ current_year }} Ibrahim Shanqiti •
+      <a href="https://github.com/IbrahimShanqiti/Chromashot" target="_blank">Source&nbsp;Code</a>
     </footer>
   </div>
 
+  <!-- ===== JS (same IDs so backend stays unchanged) ===== -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('uploadForm');
+    document.addEventListener('DOMContentLoaded', () => {
+      const form     = document.getElementById('uploadForm');
+      const input    = document.getElementById('videoInput');
       const progress = document.getElementById('progress');
+      const filename = document.getElementById('filename');
 
+      input.addEventListener('change', () => {
+        filename.textContent = input.files[0]?.name || '';
+      });
+
+      form.addEventListener('submit', e => {
+        // show indeterminate bar while upload happens
+        progress.style.display = 'block';
+        progress.removeAttribute('value');
+      });
     });
   </script>
 </body>
