@@ -26,7 +26,7 @@ def upload():
     video.save(in_path)
 
     # 2) Run chromashot_fast → PPM, then ffmpeg → PNG
-    subprocess.run(['./chromashot', in_path, ppm_path], check=True, timeout=300)
+    subprocess.run(['./chromashot_fast', in_path, ppm_path], check=True, timeout=300)
     subprocess.run(['ffmpeg', '-y', '-i', ppm_path, png_path],
                    check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
