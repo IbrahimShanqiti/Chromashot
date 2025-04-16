@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Chromashot • Colour Timeline Generator</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --primary: #5c6ac4;
+      --primary-hover: #4b58a6;
+      --text: #333333;
+      --text-light: #666666;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px var(--shadow);
+      overflow: hidden;
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+    }
+    main {
+      padding: 2rem;
+    }
+    .progress-bar {
+      display: none;
+      width: 100%;
+      height: 0.5rem;
+      margin-bottom: 1.5rem;
+      appearance: none;
+    }
+    .progress-bar::-webkit-progress-bar {
+      background: #eee;
+      border-radius: 4px;
+    }
+    .progress-bar::-webkit-progress-value {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+    .upload-card {
+      border: 2px dashed var(--primary);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .upload-card:hover {
+      background: #fafbff;
+      border-color: var(--primary-hover);
+    }
+    .upload-card input[type="file"] {
+      display: none;
+    }
+    .upload-label {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-weight: 500;
+    }
+    .upload-label:hover {
+      background: var(--primary-hover);
+    }
+    .upload-card p {
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+    .btn-submit {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover {
+      background: var(--primary-hover);
+    }
+    .result {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .result img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+    .btn-download {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-download:hover {
+      background: var(--primary-hover);
+    }
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.875rem;
+      color: var(--text-light);
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.5rem; }
+      .upload-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Chromashot</h1>
+      <p style="font-weight:300;">Generate a colour‑timeline from your video</p>
+    </header>
+    <main>
+      <form id="uploadForm" class="upload-card" action="/upload" method="post" enctype="multipart/form-data">
+        <p>Upload a video file (MP4, MKV, AVI, etc.) and get a 1920×1080 colour‑stripe image.</p>
+        <label class="upload-label">
+          Choose Video
+          <input type="file" name="video" accept="video/*" required onchange="document.getElementById('filename').textContent = this.files[0]?.name">
+        </label>
+        <div id="filename" style="margin-top:0.5rem;color:var(--text-light);font-size:0.9rem;"></div>
+        <button type="submit" class="btn-submit">Generate Timeline</button>
+      </form>
+
+      {% if image_url %}
+      <div class="result">
+        <h2 style="margin-bottom:1rem;color:var(--text);font-weight:400;">Your Colour Timeline</h2>
+        <img src="{{ image_url }}" alt="Colour Timeline">
+        <br>
+        <a href="{{ image_url }}" download class="btn-download">Download PNG</a>
+      </div>
+      {% endif %}
+    </main>
+    <footer>
+      © {{ current_year }} Your Name • <a href="https://github.com/yourrepo" style="color:var(--primary);text-decoration:none;">GitHub Repo</a>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('uploadForm');
+      const progress = document.getElementById('progress');
+
+    });
+  </script>
+</body>
+</html>
