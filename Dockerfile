@@ -17,8 +17,9 @@ COPY . /app
 RUN gcc -std=c99 -O3 -march=native chromashot_fast.c -o chromashot_fast \
       $(pkg-config --cflags --libs libavformat libavcodec libavutil libswscale) -lm
 
-# 5) install Flask
+# 5) install Flask and Gunicorn
 RUN pip install --no-cache-dir flask
+RUN pip install --no-cache-dir flask gunicorn
 
 # 6) expose & start
 EXPOSE 8000
